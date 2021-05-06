@@ -32,6 +32,7 @@ class _ClientesState extends State<Clientes> {
     return GetBuilder<ClientesController>(
       init: ClientesController(),
       builder: (_) => Scaffold(
+        
         appBar: AppBar(
           centerTitle: true,
           title: Text("Clientes"),
@@ -56,18 +57,32 @@ class _ClientesState extends State<Clientes> {
         }
           return ListView(
             children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            return Card(
-              elevation: 5,
-              child: ListTile(
-                leading: CircleAvatar(
+            return Container(
+    width: 400,
+    padding: new EdgeInsets.all(3.0),
+
+    child: Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(19.0),
+      ),
+      color: Colors.transparent,
+      elevation: 3,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            leading: CircleAvatar(
                   backgroundColor: Colors.amber,
                   child: Text(document.data()!['Nombre'][0]),
 
                 ),
-              title: Text(document.data()!['Nombre']),
-              subtitle: Text(document.data()!['Direccion']),
-            ),
-            );
+            title: Text(document.data()!['Nombre'], style: TextStyle(color: Colors.white, fontSize: 16)),
+            subtitle: Text( document.data()!['Direccion'], style: TextStyle(color: Colors.white, fontSize: 14)),
+          ),
+        ],
+      ),
+    ),
+  );
           }).toList(),
         );
 

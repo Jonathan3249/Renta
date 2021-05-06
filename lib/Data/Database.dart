@@ -8,6 +8,27 @@ class DataBase
 {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+   Future<void> agregarProducto(String nombre, String precio, String descripcion) async 
+  {
+    try
+    {
+      await _firestore 
+        .collection('Productos')
+        .add({
+          'Nombre': nombre,
+          'Precio': precio,
+          'Descripcion': descripcion,
+          'Fecha': Timestamp.now()
+
+        });
+    }
+    catch(e)
+    {
+      print(e);
+      rethrow;
+    }
+  }
+
   Future<void> agregarCliente(String nombre, String direccion, String telefono, String noCuenta) async 
   {
     try

@@ -3,6 +3,7 @@ import 'package:flutter_application_1/controlador/homepage_controller.dart';
 import 'package:flutter_application_1/controlador/login_controller.dart';
 import 'package:flutter_application_1/controlador/pedidosController.dart';
 import 'package:flutter_application_1/menus/pedidos.dart';
+import 'package:flutter_application_1/menus/productos.dart';
 import 'package:flutter_application_1/menus/ventas.dart';
 
 import 'package:get/get.dart';
@@ -47,6 +48,15 @@ class HomePage extends StatelessWidget {
               trailing: Icon(Icons.keyboard_arrow_right, color:Colors.lightBlue),
               title: Text('Compras', style: TextStyle( fontSize: 18),
             ),
+            ),
+              ListTile(leading: Icon(Icons.inventory, color: Colors.lightBlue),
+              trailing: Icon(Icons.keyboard_arrow_right, color:Colors.lightBlue),
+              title: Text('Productos', style: TextStyle( fontSize: 18),
+            ),
+            onTap: ()
+            {
+              Get.to(Productos());
+            },
             ),
             ListTile(leading: Icon(Icons.list, color: Colors.lightBlue),
               trailing: Icon(Icons.keyboard_arrow_right, color:Colors.lightBlue),

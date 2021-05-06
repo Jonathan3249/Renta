@@ -5,14 +5,14 @@ import 'package:flutter_application_1/controlador/addClientes_Controller.dart';
 import 'package:get/state_manager.dart';
 
 
+@override
+void initstate()
+{
+}
+
 
 class AddClientes extends StatelessWidget {
-  
-  
-final TextEditingController nombreAdd = TextEditingController();
-  final TextEditingController direccionAdd = TextEditingController();
-  final TextEditingController telefonoAdd = TextEditingController();
-  final TextEditingController cuentaAdd = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
