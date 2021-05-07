@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controlador/NavController.dart';
 import 'package:flutter_application_1/controlador/clientes_controller.dart';
 import 'package:flutter_application_1/controlador/scrollController.dart';
+import 'package:flutter_application_1/controlador/ventasController.dart';
 import 'package:flutter_application_1/menus/add_clientes.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,7 @@ final List<Widget> contenido =
     Text("Historial"),
   ];
 final NavController nav = Get.put(NavController());
+final VentasController ventas =Get.put(VentasController());
 final Scroll scr = Scroll();
 
 class Clientes extends StatefulWidget {
@@ -26,6 +28,7 @@ class Clientes extends StatefulWidget {
 }
 
 class _ClientesState extends State<Clientes> {
+
   CollectionReference _firestore = FirebaseFirestore.instance.collection('Clientes');
   @override
   Widget build(BuildContext context) {
@@ -78,6 +81,17 @@ class _ClientesState extends State<Clientes> {
                 ),
             title: Text(document.data()!['Nombre'], style: TextStyle(color: Colors.white, fontSize: 16)),
             subtitle: Text( document.data()!['Direccion'], style: TextStyle(color: Colors.white, fontSize: 14)),
+            
+            onTap: (){
+            _.actualizarDatos(document.data()!['Nombre']);
+            if(ventas.cambios.value.cambiosNuevos == 1)
+            {
+              Get.back();
+              ventas.actualizarDatos(0);
+            }
+            ventas.actualizarDatos(0);
+
+            },
           ),
         ],
       ),

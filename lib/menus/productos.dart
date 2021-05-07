@@ -47,14 +47,14 @@ class Productos extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(19.0),
       ),
-      color: Colors.indigo,
+      color: Colors.transparent,
       elevation: 3,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
             leading: Icon(Icons.carpenter_sharp, size: 70),
-            title: Text(document.data()!['Nombre'], style: TextStyle(color: Colors.black, fontSize: 20)),
+            title: Text(document.data()!['Nombre'], style: TextStyle(color: Colors.white, fontSize: 20)),
             subtitle: Text('Precio: '+ document.data()!['Precio'], style: TextStyle(color: Colors.white, fontSize: 18)),
           ),
           ButtonTheme(

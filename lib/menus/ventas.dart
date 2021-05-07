@@ -1,8 +1,24 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controlador/clientes_controller.dart';
+
 import 'package:flutter_application_1/controlador/ventasController.dart';
 import 'package:get/get.dart';
 
-class Ventas extends StatelessWidget {
+
+import 'clientes.dart';
+
+ClientesController cliente = Get.put(ClientesController());
+
+
+class Ventas extends StatefulWidget {
+
+
+  @override
+  _VentasState createState() => _VentasState();
+}
+class _VentasState extends State<Ventas> {
   
 
   @override
@@ -15,12 +31,16 @@ class Ventas extends StatelessWidget {
         title: Text("Ventas ")
 
     ),
-      body: Container(
+    
+      body: Obx(
+        () => Container(
         padding: EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-        TextFormField(
+       TextFormField(
+         key: Key(cliente.datos.value.datosNuevos.toString()),
+         initialValue:cliente.datos.value.datosNuevos ,
           cursorColor: Theme.of(context).accentColor,
           maxLength: 20,
           decoration: InputDecoration(
@@ -29,6 +49,11 @@ class Ventas extends StatelessWidget {
               Icons.check_circle,
             ),
           ),
+          onTap: (){
+            _.actualizarDatos(1);
+            Get.to(Clientes());
+            
+          },
         ),
         TextFormField(
           cursorColor: Theme.of(context).accentColor,
@@ -58,9 +83,9 @@ class Ventas extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
           ),
           onPressed: () {
-            
           })
       ]),
+      ),
       ),
       )
     );
