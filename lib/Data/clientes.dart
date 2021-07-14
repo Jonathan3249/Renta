@@ -10,27 +10,28 @@ class ListaClientes
   String? identificador;
 
   ListaClientes(
-    this.nombre,
+    {this.nombre,
     this.direccion,
     this.telefono,
     this.noCuenta,
     this.fechaCreada,
     this.identificador
+    }
 
   );
 
-  ListaClientes.fromDocumentSnapshot(
-    DocumentSnapshot documentSnapshot
-  )
-  {
-      identificador = documentSnapshot.id;
-      nombre = documentSnapshot.data()!['Nombre'];
-      direccion = documentSnapshot.data()!['Direccion'];
-      telefono = documentSnapshot.data()!['Telefono'];
-      noCuenta = documentSnapshot.data()!['Cuenta'];
-      fechaCreada = documentSnapshot.data()!['Fecha'];
+ ListaClientes.fromJson(Map<String, dynamic> map, {String? id})
+  { ListaClientes(
+     identificador: id,
+     nombre : map["Nombre"],
+     direccion : map["Direccion"],
+     telefono : map["Telefono"],
+     fechaCreada : map["Fecha"],
+     noCuenta : map["Cuenta"]
+  );
+
+
+ 
+  
   }
-
-
-
-}  
+} 

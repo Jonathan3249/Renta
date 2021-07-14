@@ -1,36 +1,30 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/componentes/constants.dart';
-import 'package:flutter_application_1/controlador/clientes_controller.dart';
-
-import 'package:flutter_application_1/controlador/ventasController.dart';
-import 'package:flutter_application_1/menus/addventas.dart';
+import 'package:flutter_application_1/controlador/add_compras_controller.dart';
+import 'package:flutter_application_1/controlador/compras_controller.dart';
 import 'package:get/get.dart';
 
-
-ClientesController cliente = Get.put(ClientesController());
-VentasController control = Get.put(VentasController());
-
-class Ventas extends StatelessWidget {
+class Compras extends StatelessWidget {
+  
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<VentasController>
+  return GetBuilder<ComprasController>
     (
-      init: VentasController(),
+      init: ComprasController(),
       builder: (_) => Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlue,
         onPressed: () {
-          Get.to(AddVentas());
+          Get.to(AddCompras());
         },
         child: Icon(Icons.add,color:Colors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
       centerTitle: true,
-      title: Text("Lista de Ventas"),
+      title: Text("Lista de Compras"),
       ),
       body: StreamBuilder<QuerySnapshot>
       (
@@ -62,21 +56,21 @@ class Ventas extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: Icon(Icons.ballot, size: 50),
-            title: Text(document.data()!['Cliente'], style: TextStyle(color: Colors.white, fontSize: 20)),
+            title: Text(document.data()!['Proveedor'], style: TextStyle(color: Colors.white, fontSize: 20)),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text( "Total:" + document.data()!['Total'], style: TextStyle(color: Colors.white, fontSize: 14)),
                 Divider(),
-                Text( "Observacion: " + document.data()!['Notas'], style: TextStyle(color: Colors.white, fontSize: 14)),
+                Text( "Observacion: " + document.data()!['Nota de Compra'], style: TextStyle(color: Colors.white, fontSize: 14)),
                 Divider(),
-                Center(child: Text("Detalles")),
+                Center(child: Text("Pedidos")),
                 Divider(),
 
                 Row(
                   children: [
                     Expanded(child: Text(document.data()!['Producto1'], style: TextStyle(color: Colors.white, fontSize: 14))),
-                    Text(document.data()!['Cantidad'], style: TextStyle(color: Colors.white, fontSize: 14)),
+                    Text(document.data()!['Cantidad1'], style: TextStyle(color: Colors.white, fontSize: 14)),
                   ],
                 ),
               ],),
@@ -90,11 +84,11 @@ class Ventas extends StatelessWidget {
                   mydialog(
                     context,
                     title: "Esta seguro de eliminar?",
-                    content: "Borrar " + document.data()!['Cliente'],
+                    content: "Borrar " + document.data()!['Nombre'],
                     ok: ()async
                     {
                       Get.back();
-                      await _.borrarVentas(document.id);
+                      await _.borrarCompras(document.id);
                     }
                     );
                 }),

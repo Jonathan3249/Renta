@@ -29,6 +29,28 @@ class DataBase
     }
   }
 
+  Future<void> agregarProveedor(String nombre, String direccion, String telefono, String correo) async 
+  {
+    try
+    {
+      await _firestore 
+        .collection('Proveedor')
+        .add({
+          'Nombre': nombre,
+          'Direccion': direccion,
+          'Telefono': telefono,
+          'Fecha': Timestamp.now(),
+          'Correo': correo
+
+        });
+    }
+    catch(e)
+    {
+      print(e);
+      rethrow;
+    }
+  }
+
   Future<void> agregarCliente(String nombre, String direccion, String telefono, String noCuenta) async 
   {
     try
@@ -77,10 +99,12 @@ class DataBase
     {
       List<ListaClientes> retVal = [];
       query.docs.forEach((element) {
-        retVal.add(ListaClientes.fromDocumentSnapshot(element));
+        //retVal.add(ListaClientes.fromDocumentSnapshot(element));
       });
       return retVal;
     });
 
   }
+
+  
 }

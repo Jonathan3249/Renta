@@ -1,15 +1,12 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 
-
-class VentasController extends GetxController
+class ComprasController extends GetxController
 {
   final firestoreInstance = FirebaseFirestore.instance;
-  CollectionReference firestore = FirebaseFirestore.instance.collection('Ventas');
+  CollectionReference firestore = FirebaseFirestore.instance.collection('Compras');
 
- Future borrarVentas(String id) async {
+ Future borrarCompras(String id) async {
     try {
       await firestore.doc(id).delete();
       return true;
@@ -32,6 +29,4 @@ class VentasController extends GetxController
     print(value.id);
   });
 }
-
 }
-

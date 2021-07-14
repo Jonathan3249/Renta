@@ -189,8 +189,7 @@ class LoginPages extends StatelessWidget {
                   Text("Registrarte",style: TextStyle(color: Color(0xff6bceff)),),
                   ],),
                   ),
-                  
-                ], 
+                ],
               ),
               onTap: (){
               },

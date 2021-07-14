@@ -5,7 +5,12 @@ class ProductosController extends GetxController
 {
 CollectionReference firestore = FirebaseFirestore.instance.collection('Productos');
 
-
-
-
+ Future borrarProducto(String id) async {
+    try {
+      await firestore.doc(id).delete();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

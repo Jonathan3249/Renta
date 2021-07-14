@@ -1,36 +1,30 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/componentes/constants.dart';
-import 'package:flutter_application_1/controlador/clientes_controller.dart';
-
-import 'package:flutter_application_1/controlador/ventasController.dart';
-import 'package:flutter_application_1/menus/addventas.dart';
+import 'package:flutter_application_1/controlador/proveedorController.dart';
+import 'package:flutter_application_1/menus/add_proveedor.dart';
 import 'package:get/get.dart';
 
-
-ClientesController cliente = Get.put(ClientesController());
-VentasController control = Get.put(VentasController());
-
-class Ventas extends StatelessWidget {
+class Proveedor extends StatelessWidget {
+  
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<VentasController>
+    return GetBuilder<ProveedorControlador>
     (
-      init: VentasController(),
+      init: ProveedorControlador(),
       builder: (_) => Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlue,
         onPressed: () {
-          Get.to(AddVentas());
+          Get.to(AddProveedor());
         },
         child: Icon(Icons.add,color:Colors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
       centerTitle: true,
-      title: Text("Lista de Ventas"),
+      title: Text("Lista de Proveedores"),
       ),
       body: StreamBuilder<QuerySnapshot>
       (
@@ -45,7 +39,7 @@ class Ventas extends StatelessWidget {
           return CircularProgressIndicator();
         }
 
-        return ListView(
+        return  ListView(
             children: snapshot.data!.docs.map((DocumentSnapshot document) {
            return Container(
     width: 400,
@@ -61,24 +55,13 @@ class Ventas extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.ballot, size: 50),
-            title: Text(document.data()!['Cliente'], style: TextStyle(color: Colors.white, fontSize: 20)),
+            leading: Icon(Icons.business, size: 70),
+            title: Text(document.data()!['Nombre'], style: TextStyle(color: Colors.white, fontSize: 20)),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text( "Total:" + document.data()!['Total'], style: TextStyle(color: Colors.white, fontSize: 14)),
-                Divider(),
-                Text( "Observacion: " + document.data()!['Notas'], style: TextStyle(color: Colors.white, fontSize: 14)),
-                Divider(),
-                Center(child: Text("Detalles")),
-                Divider(),
-
-                Row(
-                  children: [
-                    Expanded(child: Text(document.data()!['Producto1'], style: TextStyle(color: Colors.white, fontSize: 14))),
-                    Text(document.data()!['Cantidad'], style: TextStyle(color: Colors.white, fontSize: 14)),
-                  ],
-                ),
+                Text(document.data()!['Direccion'], style: TextStyle(color: Colors.white, fontSize: 14)),
+                Text(document.data()!['Telefono'], style: TextStyle(color: Colors.white, fontSize: 14)),
               ],),
 
               trailing: Row(
@@ -90,11 +73,11 @@ class Ventas extends StatelessWidget {
                   mydialog(
                     context,
                     title: "Esta seguro de eliminar?",
-                    content: "Borrar " + document.data()!['Cliente'],
+                    content: "Borrar " + document.data()!['Nombre'],
                     ok: ()async
                     {
                       Get.back();
-                      await _.borrarVentas(document.id);
+                      await _.borrarProveedor(document.id);
                     }
                     );
                 }),
